@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController" >
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
    <left>
-      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="407.0" prefWidth="228.0" style="-fx-background-color: #263F73;" stylesheets="@../Css/Style.css" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="9.0" layoutY="210.0" prefHeight="45.0" prefWidth="211.0" text="Work Management System" textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -79,9 +79,9 @@
             </Label>
             <TextField fx:id="txtuname" layoutX="105.0" layoutY="129.0" promptText="Enter the username" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <PasswordField fx:id="txtpass" layoutX="105.0" layoutY="176.0" promptText="Enter the password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="btlog" layoutX="29.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="233.0" style="-fx-background-color: #263F73;" text="Login" textFill="WHITE" />
-            <Button fx:id="cancelbt" layoutX="29.0" layoutY="285.0" mnemonicParsing="false"  prefHeight="30.0" prefWidth="233.0" style="-fx-background-color: #263F73;" text="Cancel" textFill="WHITE" />
-            <Hyperlink fx:id="linkforgot" layoutX="79.0" layoutY="339.0"  text="Forgot your password ?" />
+            <Button fx:id="btlog" layoutX="29.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="233.0" styleClass="button2" stylesheets="@../Css/login.css" text="Login" textFill="WHITE" />
+            <Button fx:id="cancelbt" layoutX="29.0" layoutY="285.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="233.0" styleClass="button2" stylesheets="@../Css/login.css" text="Cancel" textFill="WHITE" />
+            <Hyperlink fx:id="linkforgot" layoutX="79.0" layoutY="339.0" text="Forgot your password ?" />
             <FontAwesomeIcon glyphName="LOCK" layoutX="141.0" layoutY="95.0" size="27" />
          </children>
       </AnchorPane>

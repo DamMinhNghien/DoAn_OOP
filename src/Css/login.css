@@ -2,6 +2,17 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+.button2{
+    -fx-background-color: #263F73;
+    -fx-background-radius: 20;
+}
+.button2{
+    -fx-background-color:   #263F73;
+    -fx-cursor: hand;
+}
+.button2:hover {
+    -fx-opacity: 0.9;
+}
+.button2:pressed{
+    -fx-opacity: 1.1;
 }

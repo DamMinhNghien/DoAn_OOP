@@ -9,18 +9,13 @@ package Card;
  * @author admin
  */
 public class Label {
-    private String id;
+
     private String name;
     private String color;
 
-    public Label(String id, String name, String color) {
-        this.id = id;
+    public Label( String name, String color) {
         this.name = name;
         this.color = color;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

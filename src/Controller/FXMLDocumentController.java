@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML2.java to edit this template
  */
-package trello;
+package Controller;
 
 import java.net.URL;
 import java.util.Optional;
@@ -37,7 +37,6 @@ private Button myButton;
     dialog.setHeaderText("Nhập tên bảng mới:");
     dialog.setX(923);
     dialog.setY(220);
-    // Set the owner of the dialog to the button's stage
     dialog.initOwner(myButton.getScene().getWindow());
     // Tạo một Label với biểu tượng cây
     Label iconLabel = new Label();

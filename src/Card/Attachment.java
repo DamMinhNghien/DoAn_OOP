@@ -9,18 +9,14 @@ package Card;
  * @author admin
  */
 public class Attachment {
-     private String id;
+
     private String name;
     private String url;
 
-    public Attachment(String id, String name, String url) {
-        this.id = id;
+    public Attachment(String name, String url) {
+   
         this.name = name;
         this.url = url;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

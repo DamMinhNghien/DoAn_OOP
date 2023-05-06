@@ -4,9 +4,10 @@
  */
 package Card;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import Member.Member;
 /**
  *
  * @author admin
@@ -15,20 +16,21 @@ public class MainCard {
     private String title; 
     private String description;
     private Date dueDate;
-    private  List<String> labels; 
-    private  List<String> attachments; 
-    private List<String> comments; 
+    private  List<Label> labels; 
+    private  List<Attachment> attachments; 
+    private List<Comment> comments; 
      private int position;
      private boolean archived;
-      private List<String> members;
+     private List<Member> User;
      
-    public MainCard(String title, String description, Date dueDate, List<String> labels, List<String> attachments, List<String> comments,int position,boolean archived) {
+    public MainCard(String title, String description, Date dueDate,int position,boolean archived) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.labels = labels;
-        this.attachments = attachments;
-        this.comments = comments;
+         this.labels = new ArrayList<>();
+         this.comments = new ArrayList<>();
+      this.attachments = new ArrayList<>();
+      this.User = new ArrayList<>();
         this.position = position;
         this.archived=false;
     }
@@ -56,40 +58,47 @@ public class MainCard {
         return dueDate;
     }
 
-    public void addLabel(String label) {
-        labels.add(label);
+     public void addLabel(Label label) {
+      this.labels.add(label);
+   }
+
+    public void removeLabel(Label label) {
+      this.labels.remove(label);
+   }
+
+    public List<Label> getLabels() {
+      return labels;
+   }
+
+    public List<Attachment> getAttachments() {
+      return attachments;
+   }
+   
+   public void addAttachment(Attachment attachment) {
+      this.attachments.add(attachment);
+   }
+   
+   public void removeAttachment(Attachment attachment) {
+      this.attachments.remove(attachment);
+   }
+
+    public List<Comment> getComments() {
+      return comments;
+   }
+   
+   public void addComment(Comment comment) {
+      this.comments.add(comment);
+   }
+   
+   public void removeComment(Comment comment) {
+      this.comments.remove(comment);
+   }
+   public void addMember(Member user) {
+        this.User.add(user);
     }
 
-    public void removeLabel(String label) {
-        labels.remove(label);
-    }
-
-    public List<String> getLabels() {
-        return labels;
-    }
-
-    public void addAttachment(String attachment) {
-        attachments.add(attachment);
-    }
-
-    public void removeAttachment(String attachment) {
-        attachments.remove(attachment);
-    }
-
-    public List<String> getAttachments() {
-        return attachments;
-    }
-
-    public void addComment(String comment) {
-        comments.add(comment);
-    }
-
-    public void removeComment(String comment) {
-        comments.remove(comment);
-    }
-
-    public List<String> getComments() {
-        return comments;
+    public void removeMember(Member user) {
+        this.User.remove(user);
     }
       public int getPosition() {
         return position;
@@ -109,18 +118,6 @@ public class MainCard {
     public void unarchive() {
         archived = false;
     }
-     public void addMember(String memberName) {
-      members.add(memberName);
-   }
 
-
-   public void removeMember(String memberName) {
-      members.remove(memberName);
-   }
-
-
-   public List<String> getMembers() {
-      return members;
-   }
 }
 

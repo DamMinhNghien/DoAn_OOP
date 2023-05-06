@@ -6,8 +6,17 @@ package Table;
 
 /**
  *
- * @author admin
+ * @author ASUS
  */
-public class MainTable {
-    
+class Table {
+    // thuoc tinh
+    private int id;
+    //hàm tạo 
+    public Table(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

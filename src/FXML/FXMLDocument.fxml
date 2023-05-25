@@ -70,11 +70,11 @@
          </children>
       </Pane>
       <FontAwesomeIcon />
-      <AnchorPane layoutX="185.0" layoutY="81.0" prefHeight="563.0" prefWidth="190.0" styleClass="List">
+      <AnchorPane layoutX="183.0" layoutY="99.0" prefHeight="563.0" prefWidth="190.0" styleClass="List">
          <children>
-            <Button fx:id="ThemThe" layoutX="140.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
-            <Label layoutX="31.0" layoutY="25.0" text="Label" />
-            <ListView fx:id="container1" layoutX="5.0" layoutY="47.0" prefHeight="518.0" prefWidth="184.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
+            <Button fx:id="ThemThe" layoutX="139.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
+            <Label layoutX="32.0" layoutY="16.0" text="Label" />
+            <ListView fx:id="container1" layoutX="3.0" layoutY="38.0" prefHeight="518.0" prefWidth="190.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
          </children>
       </AnchorPane>
    </children>

@@ -13,27 +13,30 @@ import Member.Member;
  * @author admin
  */
 public class MainCard {
-    private String title; 
+    public int IDCard;
+    public String title; 
     private String description;
     private Date dueDate;
     private  List<Label> labels; 
     private  List<Attachment> attachments; 
     private List<Comment> comments; 
-     private int position;
      private boolean archived;
      private List<Member> User;
+ 
      
-    public MainCard(String title, String description, Date dueDate,int position,boolean archived) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-         this.labels = new ArrayList<>();
-         this.comments = new ArrayList<>();
-      this.attachments = new ArrayList<>();
-      this.User = new ArrayList<>();
-        this.position = position;
-        this.archived=false;
-    }
+//    public MainCard(String title) {
+////        , String description, Date dueDate,int position,boolean archived
+//        this.title = title;
+//        this.description = description;
+//        this.dueDate = dueDate;
+//         this.labels = new ArrayList<>();
+//         this.comments = new ArrayList<>();
+//      this.attachments = new ArrayList<>();
+//      this.User = new ArrayList<>();
+//        this.position = position;
+//        this.archived=false;
+//
+//    }
      public void setTitle(String title) {
         this.title = title;
     }
@@ -100,13 +103,7 @@ public class MainCard {
     public void removeMember(Member user) {
         this.User.remove(user);
     }
-      public int getPosition() {
-        return position;
-    }
 
-    public void setPosition(int position) {
-        this.position = position;
-    }
     public boolean isArchived() {
         return archived;
     }

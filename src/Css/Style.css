@@ -7,25 +7,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : admin
 */
 
-.button{
+.buttonz{
     -fx-background-color:  #255873;
+        -fx-cursor: hand;
 }
-.button:hover {
+.buttonz:hover {
     -fx-background-color: #12394e;
 }
-.button:pressed{
+.buttonz:pressed{
     -fx-background-color: #12a3ef;
 }
-.button1{
+.OKbutton{
     -fx-background-color:  #ffffff;
-           -fx-border-color:  #255873;
-           -fx-border-radius: 20;
+    -fx-border-color:  #255873;
+    -fx-border-radius: 20;
+        -fx-cursor: hand;
 }
-.button1:hover {
-    -fx-background-color: #8a969c;
+.OKbutton:hover {
+    -fx-background-color: #bbbbbb;
+   
 }
-.button1:pressed{
-    -fx-background-color: #12a3ef;
+.OKbutton:pressed{
+    -fx-background-color: #8f8f8f;
+  
 }
 
 .root{
@@ -39,7 +43,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
      -fx-background-image: url('../image/R.jpg');
     -fx-border-radius: 50%;
 }
+.card{
+        -fx-background-color: #ffffff;
+        -fx-border-color: #255873;
+        -fx-background-radius: 30;
+        -fx-cursor: hand;
+   
+}
 
+.card:pressed{
+    -fx-opacity: 1.1;
+}
+.list-cell {
+        -fx-background-radius: 20;
+         -fx-background-color: #ffffff;
+
+}
+.List{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+}
+
+.list-cell:selected:focused, .list-cell:selected {
+    -fx-background-color: white;
+}
+.list-cell{
+    background-color: gray;
+}
+.ListView{
+    -fx-background-radius: 20;
+}
+.AnchorPane:pressed{
+    -fx-background-color: #ffffff;
+}
+.AnchorPane{
+    -fx-background-color: #ffffff;
+}
 
 
 

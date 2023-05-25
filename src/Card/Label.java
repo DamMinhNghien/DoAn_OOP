@@ -13,7 +13,7 @@ public class Label {
     private String name;
     private String color;
 
-    public Label( String name, String color) {
+    public Label( String name) {
         this.name = name;
         this.color = color;
     }

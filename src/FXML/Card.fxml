@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" fx:id="CardPane" onMouseClicked="#newscene" prefHeight="85.0" prefWidth="162.0" styleClass="AnchorPane" stylesheets="@../Css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CardController">
+   <children>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="162.0" styleClass="card" stylesheets="@../Css/Style.css">
+         <children>
+            <TextField fx:id="TextField1" layoutX="21.0" layoutY="26.0" prefHeight="26.0" prefWidth="116.0" />
+            <Button fx:id="AddTitle" layoutX="21.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#addTitle" prefHeight="27.0" prefWidth="60.0" styleClass="OKbutton" text="OK" />
+            <Pane layoutX="-2.0" layoutY="1.0" prefHeight="26.0" prefWidth="162.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

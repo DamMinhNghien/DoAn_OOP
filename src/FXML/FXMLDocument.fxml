@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="857.0" stylesheets="@../Css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="947.0" styleClass="root" stylesheets="@../Css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
    <children>
-      <VBox layoutY="67.0" opacity="0.8" prefHeight="539.0" prefWidth="162.0" style="-fx-background-color: #255873;" stylesheets="@../Css/Style.css">
+      <VBox layoutY="67.0" opacity="0.8" prefHeight="641.0" prefWidth="162.0" style="-fx-background-color: #255873;" stylesheets="@../Css/Style.css">
          <children>
             <Pane prefHeight="65.0" prefWidth="162.0">
                <children>
@@ -26,24 +25,24 @@
                   </Label>
                </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" stylesheets="@../Css/Style.css" text="Bảng" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" styleClass="buttonz" stylesheets="@../Css/Style.css" text="Bảng" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="TRELLO" />
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="68.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" stylesheets="@../Css/Style.css" text="Thành Viên" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="68.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" styleClass="buttonz" stylesheets="@../Css/Style.css" text="Thành Viên" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="USER" />
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="116.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" stylesheets="@../Css/Style.css" text="Các cài đặt không gian làm việc" textFill="WHITE" wrapText="true">
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="116.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" styleClass="buttonz" stylesheets="@../Css/Style.css" text="Các cài đặt không gian làm việc" textFill="WHITE" wrapText="true">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="COG" />
                </graphic>
             </Button>
          </children>
       </VBox>
-      <Pane opacity="0.8" prefHeight="67.0" prefWidth="857.0" style="-fx-background-color: #255873;">
+      <Pane opacity="0.8" prefHeight="67.0" prefWidth="947.0" style="-fx-background-color: #255873;">
          <children>
             <Label layoutX="30.0" layoutY="5.0" prefHeight="57.0" prefWidth="151.0" text="Trello" textFill="WHITE" wrapText="true">
                <graphic>
@@ -53,50 +52,30 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <ImageView fitHeight="47.0" fitWidth="45.0" layoutX="780.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="47.0" fitWidth="45.0" layoutX="880.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/R.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="597.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #255873;" text="Thông báo" textFill="WHITE">
+            <Button layoutX="671.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #255873;" text="Thông báo" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="BELL" text="" />
                </graphic>
             </Button>
-            <Button layoutX="687.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #255873;" text="Hỏi đáp" textFill="WHITE">
+            <Button layoutX="773.0" layoutY="21.0" mnemonicParsing="false" style="-fx-background-color: #255873;" text="Hỏi đáp" textFill="WHITE">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="QUESTION" text="" wrappingWidth="21.5999755859375" />
                </graphic>
             </Button>
          </children>
       </Pane>
-      <ListView layoutX="170.0" layoutY="128.0" prefHeight="475.0" prefWidth="130.0" styleClass="listview" stylesheets="@../Css/Style.css" />
-      <ListView layoutX="310.0" layoutY="128.0" prefHeight="475.0" prefWidth="130.0" styleClass="listview" stylesheets="@../Css/Style.css" />
-      <ListView layoutX="450.0" layoutY="128.0" prefHeight="475.0" prefWidth="130.0" styleClass="listview" stylesheets="@../Css/Style.css" />
-      <Button fx:id="myButton" layoutX="597.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="46.0" prefWidth="130.0" stylesheets="@../Css/Style.css" text="+ Thêm Danh Sách">
-         <styleClass>
-            <String fx:value="button1" />
-            <String fx:value="listview" />
-         </styleClass></Button>
       <FontAwesomeIcon />
-      <Label layoutX="181.0" layoutY="146.0" prefHeight="28.0" prefWidth="61.0" text="Cần làm">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="325.0" layoutY="146.0" prefHeight="28.0" prefWidth="68.0" text="Đang làm" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="465.0" layoutY="146.0" prefHeight="28.0" prefWidth="68.0" text="Đã xong" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+      <AnchorPane layoutX="185.0" layoutY="81.0" prefHeight="563.0" prefWidth="190.0" styleClass="List">
+         <children>
+            <Button fx:id="ThemThe" layoutX="140.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
+            <Label layoutX="31.0" layoutY="25.0" text="Label" />
+            <ListView fx:id="container1" layoutX="5.0" layoutY="47.0" prefHeight="518.0" prefWidth="184.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
+         </children>
+      </AnchorPane>
    </children>
-   <styleClass>
-      <String fx:value="root" />
-      <String fx:value="button1" />
-   </styleClass>
 </AnchorPane>

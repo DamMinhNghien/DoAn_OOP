@@ -60,6 +60,7 @@ public class CardController implements Initializable {
             label.setLayoutX(36);
             label.setLayoutY(26);
             CardPane.getChildren().add(label);
+            label.setStyle("-fx-text-fill: black;");
             AddTitle.setVisible(false);
             TextField1.setVisible(false);
     

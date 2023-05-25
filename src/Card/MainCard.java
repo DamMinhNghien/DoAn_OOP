@@ -4,15 +4,17 @@
  */
 package Card;
 
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-import Member.Member;
+
 /**
  *
  * @author admin
  */
 public class MainCard {
+
+  
     public int IDCard;
     public String title; 
     private String description;
@@ -21,22 +23,17 @@ public class MainCard {
     private  List<Attachment> attachments; 
     private List<Comment> comments; 
      private boolean archived;
-     private List<Member> User;
- 
-     
-//    public MainCard(String title) {
-////        , String description, Date dueDate,int position,boolean archived
-//        this.title = title;
-//        this.description = description;
-//        this.dueDate = dueDate;
-//         this.labels = new ArrayList<>();
-//         this.comments = new ArrayList<>();
-//      this.attachments = new ArrayList<>();
-//      this.User = new ArrayList<>();
-//        this.position = position;
-//        this.archived=false;
-//
-//    }
+
+  public MainCard(int IDCard, String title, String description, Date dueDate, List<Label> labels, List<Attachment> attachments, List<Comment> comments, boolean archived) {
+        this.IDCard = IDCard;
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+            this.labels = labels;
+        this.attachments = attachments;
+        this.comments = comments;
+        this.archived = archived;
+    }
      public void setTitle(String title) {
         this.title = title;
     }
@@ -96,13 +93,6 @@ public class MainCard {
    public void removeComment(Comment comment) {
       this.comments.remove(comment);
    }
-   public void addMember(Member user) {
-        this.User.add(user);
-    }
-
-    public void removeMember(Member user) {
-        this.User.remove(user);
-    }
 
     public boolean isArchived() {
         return archived;

@@ -2,35 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Card;
+package Controller;
 
-
-import Controller.CardController;
-import java.io.IOException;
+import Card.Attachment;
+import Card.Comment;
+import Card.Label;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 
 /**
  *
  * @author admin
  */
-public class MainCard {
-
-    
-    public int IDCard;
+class NewCard {
+      public int IDCard;
     public String title; 
     private String description;
     private Date dueDate;
@@ -39,10 +26,9 @@ public class MainCard {
     private List<Comment> comments; 
     private boolean archived;
 
-    public MainCard() {
+    public NewCard(){
+        
     }
-
- 
 
      public void setTitle(String title) {
         this.title = title;
@@ -116,10 +102,8 @@ public class MainCard {
         archived = false;
     }
 
-    
 
     public void initialize(URL url, ResourceBundle rb) {
        
     }
 }
-

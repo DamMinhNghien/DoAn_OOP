@@ -7,6 +7,8 @@ package Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -36,27 +38,28 @@ public class NewSceneController implements Initializable {
             dataLabel.setLayoutY(72);
             CardPane2.getChildren().add(dataLabel);
             dataLabel.setOnMouseClicked(this::labelClicked);
-        }   
+             
+        } 
     }
+   @FXML
+private void labelClicked(MouseEvent e) {
+    dataLabel.setVisible(false);
+    TextField2.setPromptText("Nhập lại tiêu đề...");
+    TextField2.prefHeight(52);
+    TextField2.prefWidth(378);
+    TextField2.setLayoutX(60);
+    TextField2.setLayoutY(72);
+    CardPane2.getChildren().add(TextField2);
+}
     @FXML
-    private void labelClicked(MouseEvent e){
-        dataLabel.setVisible(false);
-        TextField2.setPromptText("Nhập lại tiêu đề...");
-        TextField2.prefHeight(52);
-        TextField2.prefWidth(378);
-         TextField2.setLayoutX(60);
-         TextField2.setLayoutY(72);
-         CardPane2.getChildren().add(TextField2);
-         
-    }
-    @FXML
-    private void AnchorPaneClicked(MouseEvent e){
-           
-                CardPane2.requestFocus();
-            
-                   }
+  private void cardPaneClicked1(MouseEvent e) {
+   
+        CardPane2.requestFocus();
+    
+  }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+  
+}
     }    
     
-}

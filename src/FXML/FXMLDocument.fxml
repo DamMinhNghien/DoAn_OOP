@@ -70,12 +70,17 @@
          </children>
       </Pane>
       <FontAwesomeIcon />
-      <AnchorPane layoutX="183.0" layoutY="99.0" prefHeight="563.0" prefWidth="190.0" styleClass="List">
+      <VBox layoutX="578.0" layoutY="188.0" prefHeight="200.0" prefWidth="100.0" />
+      <VBox layoutX="195.0" layoutY="97.0" prefHeight="580.0" prefWidth="190.0">
          <children>
-            <Button fx:id="ThemThe" layoutX="139.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
-            <Label layoutX="32.0" layoutY="16.0" text="Label" />
-            <ListView fx:id="container1" layoutX="3.0" layoutY="38.0" prefHeight="518.0" prefWidth="190.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
+            <Pane prefHeight="62.0" prefWidth="190.0" styleClass="AnchorPane" stylesheets="@../Css/Style.css">
+               <children>
+                  <Label layoutX="25.0" layoutY="23.0" text="Label" />
+                  <Button fx:id="ThemThe" layoutX="133.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
+               </children>
+            </Pane>
+            <ListView fx:id="container1" prefHeight="518.0" prefWidth="190.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
          </children>
-      </AnchorPane>
+      </VBox>
    </children>
 </AnchorPane>

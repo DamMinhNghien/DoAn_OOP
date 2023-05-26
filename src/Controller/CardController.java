@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Card.MainCard;
 import Conection.ConnectionDB;
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +41,7 @@ import javafx.scene.image.Image;
  * @author admin
  */
 public class CardController implements Initializable {
+    private MainCard card;
     private Connection conn = null;
     private PreparedStatement pat = null;
     @FXML
@@ -50,6 +52,10 @@ public class CardController implements Initializable {
     private Button AddTitle;
     @FXML
     private TextField TextField1;
+
+     public void setCard(MainCard card) {
+        this.card = card;
+    }
 
     @FXML
     private void addTitle(MouseEvent e) throws SQLException {
@@ -64,35 +70,6 @@ public class CardController implements Initializable {
             label.setStyle("-fx-text-fill: black;");
             AddTitle.setVisible(false);
             TextField1.setVisible(false);
-    
-            // Lấy giá trị IDCard lớn nhất hiện có trong            /
-            String sql = "SELECT MAX(IDCard) FROM The;";
-            try {
-                pat = conn.prepareStatement(sql);
-                ResultSet rs = pat.executeQuery();
-                int maxId = 0;
-                if (rs.next()) {
-                    maxId = rs.getInt(1);
-                }
-                int newId = maxId + 1;
-                String TieuDe=label.getText();
-                // Thêm thẻ mới vào cơ sở dữ liệu với giá trị IDCard mới được tạo
-                String sql1 = "INSERT INTO The(IDCard,title) VALUES (?,?);";
-                pat = conn.prepareStatement(sql1);
-                pat.setInt(1, newId);
-                pat.setString(2,TieuDe);
-             int i= pat.executeUpdate();
-                if(i==1){
-                    System.out.println("OK");
-                }
-  
-
-            } catch (SQLException ex) {
-                Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            finally{
-                pat.close();
-            }
         }
 
       

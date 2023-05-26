@@ -8,11 +8,18 @@ package Controller;
 
 
 
+import Card.MainCard;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 
 import javafx.fxml.FXMLLoader;
@@ -33,9 +40,9 @@ import javafx.scene.layout.AnchorPane;
 
 public class FXMLDocumentController implements Initializable {
     
- 
-    @FXML
-    private Button ThemThe;
+    private Connection conn = null;
+    private PreparedStatement pat = null;
+
     @FXML
     private ListView<AnchorPane> container1; // Khai báo và chú thích biến container với @FXML
 //    @FXML
@@ -45,16 +52,40 @@ public class FXMLDocumentController implements Initializable {
 
    
 @FXML
-public void TaoCard(MouseEvent event) throws IOException {
-    createNewCard();
-  
+public void TaoCard(MouseEvent event) throws IOException, SQLException {
+     MainCard NewCard1=new MainCard();
+     try {
+ 
+     String sql = "SELECT MAX(IDCard) FROM The;";
+     pat = conn.prepareStatement(sql);
+     ResultSet rs = pat.executeQuery();
+     int maxId = 0;
+     if (rs.next()) {
+     maxId = rs.getInt(1);
+     }
+     NewCard1.IDCard=maxId+1;
+     String sql1 = "INSERT INTO The(IDCard) VALUES (?);";
+     pat=conn.prepareStatement(sql1);
+     pat.setInt(1, NewCard1.IDCard);
+     pat.executeUpdate();
+     }
+     catch(SQLException ex){
+           Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+     }
+//     finally {
+//        conn.close();
+//     }
+     createNewCard(NewCard1);
 }
+  
 @FXML
-private void createNewCard() {
+private void createNewCard(MainCard NewCard) {
     try {
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Card.fxml"));
         AnchorPane cardPane = loader.load();
-
+        CardController cardController = loader.getController();
+        cardController.setCard(NewCard);
         // Thực hiện các thao tác tùy chỉnh cho cardPane nếu cần
          ObservableList<AnchorPane> items = container1.getItems();
         // Thêm cardPane vào danh sách mục
@@ -67,6 +98,8 @@ private void createNewCard() {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+    conn = (Connection) Conection.ConnectionDB.dbConn();
+    //190,518
+    //3 38
     }
 }

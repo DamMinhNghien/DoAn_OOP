@@ -29,6 +29,7 @@ import java.sql.SQLException;
  import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.image.Image;
 
 
 
@@ -100,11 +101,14 @@ public class CardController implements Initializable {
     public void newscene(MouseEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
         AnchorPane newScenePane = loader.load();
-
+       NewSceneController newSceneController = loader.getController();
+          String labelText = label.getText();
+      newSceneController.setLabelText(labelText);
         Stage newStage = new Stage();
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(CardPane.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
-
+        newStage.setTitle("Chỉnh Sửa Thẻ");
+        newStage.getIcons().add(new Image(getClass().getResourceAsStream("../image/trello.png")));
         Scene newScene = new Scene(newScenePane);
         newStage.setScene(newScene);
         newStage.showAndWait();
@@ -119,5 +123,6 @@ public class CardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         conn = (Connection) Conection.ConnectionDB.dbConn();
+
     }
 }

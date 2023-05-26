@@ -44,7 +44,7 @@
       </VBox>
       <Pane opacity="0.8" prefHeight="67.0" prefWidth="947.0" style="-fx-background-color: #255873;">
          <children>
-            <Label layoutX="30.0" layoutY="5.0" prefHeight="57.0" prefWidth="151.0" text="Trello" textFill="WHITE" wrapText="true">
+            <Label layoutX="30.0" layoutY="5.0" prefHeight="57.0" prefWidth="382.0" text="WorkManagementSystem" textFill="WHITE" wrapText="true">
                <graphic>
                   <FontAwesomeIcon fill="WHITE" glyphName="TRELLO" />
                </graphic>

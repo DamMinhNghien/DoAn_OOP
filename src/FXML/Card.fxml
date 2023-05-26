@@ -9,7 +9,7 @@
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="162.0" styleClass="card" stylesheets="@../Css/Style.css">
          <children>
-            <TextField fx:id="TextField1" layoutX="23.0" layoutY="27.0" prefHeight="26.0" prefWidth="116.0" />
+            <TextField fx:id="TextField1" layoutX="23.0" layoutY="27.0" prefHeight="26.0" prefWidth="116.0" promptText="Nhập tiêu đề" />
             <Button fx:id="AddTitle" layoutX="21.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#addTitle" prefHeight="27.0" prefWidth="60.0" styleClass="OKbutton" text="OK" />
             <Pane layoutX="-2.0" layoutY="1.0" prefHeight="26.0" prefWidth="162.0" />
          </children>

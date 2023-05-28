@@ -77,7 +77,19 @@ public class CardController implements Initializable {
 
       
     }
-
+    public void UpTitleDB(){
+        if(card.checkTitle()==true){
+         label.setText(card.title);
+         label.prefHeight(26);
+            label.prefWidth(107);
+            label.setLayoutX(36);
+            label.setLayoutY(26);
+            CardPane.getChildren().add(label);
+            label.setStyle("-fx-text-fill: black;");
+             AddTitle.setVisible(false);
+            TextField1.setVisible(false);
+   }
+    }
     public void newscene(MouseEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
         AnchorPane newScenePane = loader.load();
@@ -106,9 +118,11 @@ public class CardController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+        @Override
+public void initialize(URL url, ResourceBundle rb) {
+    
+   
+}
 
-
-    }
+    
 }

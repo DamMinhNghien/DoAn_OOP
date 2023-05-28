@@ -60,15 +60,51 @@ public void TaoCard(MouseEvent event) throws IOException, SQLException {
      NewCard1.IDCarDB(NewCard1.IDCard);
      createNewCard(NewCard1);
 }
-  
+ @FXML 
+public void ReTaoCard() throws IOException, SQLException {
+    Connection conn = null;
+    PreparedStatement pat = null;
+    ResultSet rs = null;
+    try {
+        conn = Conection.ConnectionDB.dbConn();
+        String sql = "SELECT COUNT(IDCard) AS NumCards FROM The";
+        pat = conn.prepareStatement(sql);
+        rs = pat.executeQuery();
+        if (rs.next()) {
+            int numCards = rs.getInt("NumCards");
+            System.out.println("Number of cards: " + numCards);
+            // Tạo các card còn thiếu để đạt đến số lượng mong muốn
+            for (int i = 0; i < numCards; i++) {
+                MainCard newCard = new MainCard();
+                newCard.IDCard = i + 1;
+                createNewCard(newCard);
+            }
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        if (rs != null) {
+            rs.close();
+        }
+        if (pat !=null) {
+            pat.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+}
 @FXML
 private void createNewCard(MainCard NewCard) throws SQLException {
     try {
+        
         conn = (Connection) Conection.ConnectionDB.dbConn();
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Card.fxml"));
         AnchorPane cardPane = loader.load();
-        CardController cardController = loader.getController();
+          CardController cardController = loader.getController();
         cardController.setCard(NewCard);
+        cardController.UpTitleDB();
         // Thực hiện các thao tác tùy chỉnh cho cardPane nếu cần
          ObservableList<AnchorPane> items = container1.getItems();
         // Thêm cardPane vào danh sách mục
@@ -82,8 +118,14 @@ private void createNewCard(MainCard NewCard) throws SQLException {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-   
-    //190,518
-    //3 38
+        try {
+            ReTaoCard();
+            //190,518
+            //3 38
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

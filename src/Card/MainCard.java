@@ -5,6 +5,7 @@
 package Card;
 
 
+import Conection.ConnectionDB;
 import Controller.CardController;
 import java.net.URL;
 import java.sql.Connection;
@@ -166,7 +167,67 @@ public class MainCard {
         conn.close();
     }
     }
-    
+   
+    public boolean checkTitle() {
+    boolean hasTitle = false;
+    try {
+          conn = (Connection) Conection.ConnectionDB.dbConn();
+        String sql = "SELECT Title FROM The WHERE IDCard = ?";
+        pat = conn.prepareStatement(sql);
+        pat.setInt(1, IDCard);
+        ResultSet rs = pat.executeQuery();
+        if (rs.next()) {
+            this.title = rs.getString("Title");
+ 
+            if (this.title != null) {
+                hasTitle = true;
+            }
+        }   
+    } catch (SQLException ex) {
+        Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        try {
+            if (pat != null) {
+                pat.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    return hasTitle;
+}
+//     public String LayTitle() {
+//  
+//    try {
+//          conn = (Connection) Conection.ConnectionDB.dbConn();
+//        String sql = "SELECT Title FROM The WHERE IDCard = ?";
+//        pat = conn.prepareStatement(sql);
+//        pat.setInt(1, IDCard);
+//        ResultSet rs = pat.executeQuery();
+//        if (rs.next()) {
+//            String title = rs.getString("Title");
+//          
+//        }   
+//    } catch (SQLException ex) {
+//        Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+//    } finally {
+//        try {
+//            if (pat != null) {
+//                pat.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//        return title;
+
+
     
 
     public void initialize(URL url, ResourceBundle rb) {

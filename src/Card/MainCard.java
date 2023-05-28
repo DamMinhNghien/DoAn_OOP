@@ -6,7 +6,6 @@ package Card;
 
 
 import Controller.CardController;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,11 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
+
 
 /**
  *
@@ -29,7 +24,6 @@ import javafx.scene.layout.AnchorPane;
  */
 public class MainCard {
 
-    
     public int IDCard;
     public String title; 
     private String description;
@@ -115,7 +109,64 @@ public class MainCard {
     public void unarchive() {
         archived = false;
     }
+         private Connection conn = null;
+    private PreparedStatement pat = null;
 
+    public void IDCarDB(int id) throws SQLException{
+         try {
+          conn = (Connection) Conection.ConnectionDB.dbConn();
+    
+     String sql1 = "INSERT INTO The(IDCard) VALUES (?);";
+     pat=conn.prepareStatement(sql1);
+     pat.setInt(1, id);
+     pat.executeUpdate();
+     }
+     catch(SQLException ex){
+           Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     finally{
+        conn.close();
+    }
+    }
+    
+    public int MaxID() throws SQLException{
+        try {
+          conn = (Connection) Conection.ConnectionDB.dbConn();
+     String sql = "SELECT MAX(IDCard) FROM The;";
+     pat = conn.prepareStatement(sql);
+     ResultSet rs = pat.executeQuery();
+     int maxId = 0;
+     if (rs.next()) {
+     maxId = rs.getInt(1);
+     }
+     return maxId;
+     }
+     catch(SQLException ex){
+           Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     finally{
+        conn.close();
+    }
+        return 0;
+    }
+    public void TitleDB(String title, int id) throws SQLException{
+         try {
+          conn = (Connection) Conection.ConnectionDB.dbConn();
+          
+     String sql1 = "UPDATE The SET title = ? WHERE IDCard = ?;";
+     pat=conn.prepareStatement(sql1);
+     pat.setString(1, title);
+     pat.setInt(2,id);
+     pat.executeUpdate();
+     }
+     catch(SQLException ex){
+           Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     finally{
+        conn.close();
+    }
+    }
+    
     
 
     public void initialize(URL url, ResourceBundle rb) {

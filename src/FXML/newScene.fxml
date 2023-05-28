@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="CardPane2" onMouseClicked="#cardPaneClicked1" prefHeight="475.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewSceneController">
+<AnchorPane fx:id="CardPane2" onMouseClicked="#CardClicked" prefHeight="475.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NewSceneController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="7.0" layoutY="2.0" prefHeight="470.0" prefWidth="619.0">
          <children>

@@ -52,7 +52,7 @@ public class CardController implements Initializable {
     private Button AddTitle;
     @FXML
     private TextField TextField1;
-
+    
      public void setCard(MainCard card) {
         this.card = card;
     }
@@ -61,7 +61,10 @@ public class CardController implements Initializable {
     private void addTitle(MouseEvent e) throws SQLException {
         String text = TextField1.getText();
         if (!text.isEmpty()) {
-            label.setText(text);
+           
+           card.setTitle(text);
+            label.setText(card.title);
+           card.TitleDB(card.title, card.IDCard);
             label.prefHeight(26);
             label.prefWidth(107);
             label.setLayoutX(36);
@@ -79,8 +82,10 @@ public class CardController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
         AnchorPane newScenePane = loader.load();
        NewSceneController newSceneController = loader.getController();
-          String labelText = label.getText();
-      newSceneController.setLabelText(labelText);
+       newSceneController.setCard(card);
+        String labelText = label.getText();
+         newSceneController.setLabelText(labelText);
+         newSceneController.setCardController(this); 
         Stage newStage = new Stage();
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(CardPane.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
@@ -93,13 +98,17 @@ public class CardController implements Initializable {
             label.setVisible(true);
         });
     }
-
+    public void updateLabel(String newTitle) {
+    label.setText(newTitle);
+}
+    public void  Focus(){         TextField1.requestFocus();
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        conn = (Connection) Conection.ConnectionDB.dbConn();
+
 
     }
 }

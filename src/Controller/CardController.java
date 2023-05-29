@@ -113,8 +113,7 @@ public class CardController implements Initializable {
     public void updateLabel(String newTitle) {
     label.setText(newTitle);
 }
-    public void  Focus(){         TextField1.requestFocus();
-    }
+ 
     /**
      * Initializes the controller class.
      */

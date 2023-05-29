@@ -120,8 +120,7 @@ private void createNewCard(MainCard NewCard) throws SQLException {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             ReTaoCard();
-            //190,518
-            //3 38
+     
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

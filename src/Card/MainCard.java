@@ -199,36 +199,6 @@ public class MainCard {
     }
     return hasTitle;
 }
-//     public String LayTitle() {
-//  
-//    try {
-//          conn = (Connection) Conection.ConnectionDB.dbConn();
-//        String sql = "SELECT Title FROM The WHERE IDCard = ?";
-//        pat = conn.prepareStatement(sql);
-//        pat.setInt(1, IDCard);
-//        ResultSet rs = pat.executeQuery();
-//        if (rs.next()) {
-//            String title = rs.getString("Title");
-//          
-//        }   
-//    } catch (SQLException ex) {
-//        Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-//    } finally {
-//        try {
-//            if (pat != null) {
-//                pat.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//        return title;
-
-
-    
 
     public void initialize(URL url, ResourceBundle rb) {
        

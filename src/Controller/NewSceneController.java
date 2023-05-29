@@ -34,44 +34,58 @@ public class NewSceneController implements Initializable {
      private MainCard card;
     @FXML
     private TextField TextField2=new TextField();
-  @FXML
+    @FXML
     private Label dataLabel=new Label();
     @FXML
     private AnchorPane CardPane2;
     @FXML
     private Button XacNhan =new Button();
     
+   
 @FXML
 public void setLabelText(String text) {
-    if (dataLabel != null) {
-        dataLabel.setText(text);
+         dataLabel.setText(text);
         dataLabel.prefHeight(52);
         dataLabel.prefWidth(170);
         dataLabel.setLayoutX(73);
         dataLabel.setLayoutY(69);
         dataLabel.setFont(new Font(20));
-        CardPane2.getChildren().add(dataLabel);
         
-        TextField2.setPromptText("Nhập lại tiêu đề...");
+         TextField2.setPromptText("Nhập lại tiêu đề...");
         TextField2.setPrefHeight(40);
         TextField2.setPrefWidth(300);
         TextField2.setFont(Font.font("Arial", 20));
         TextField2.setLayoutX(60);
         TextField2.setLayoutY(64);
-        TextField2.setVisible(false);
-        CardPane2.getChildren().add(TextField2);
-        
         
         XacNhan.setPrefHeight(30);
         XacNhan.setPrefWidth(38);
         XacNhan.setLayoutX(370);
         XacNhan.setLayoutY(67);
         XacNhan.setText("OK");
+    if (!text.isEmpty()) {
+        
+        CardPane2.getChildren().add(dataLabel);
+        
+        TextField2.setVisible(false);
+        CardPane2.getChildren().add(TextField2);
+        
         XacNhan.setVisible(false);
         CardPane2.getChildren().add(XacNhan);
         XacNhan.setOnMouseClicked(this::XacNhanClicked);
         dataLabel.setOnMouseClicked(this::labelClicked);
     } 
+    else{
+        TextField2.setVisible(true);
+        CardPane2.getChildren().add(TextField2);
+        
+        dataLabel.setVisible(false);
+        CardPane2.getChildren().add(dataLabel);
+        
+        XacNhan.setVisible(true);
+        CardPane2.getChildren().add(XacNhan);
+        XacNhan.setOnMouseClicked(this::XacNhanClicked);
+    }
 }
 
 @FXML
@@ -86,8 +100,8 @@ private void labelClicked(MouseEvent e) {
            
 }
 @FXML
-private void CardClicked(MouseEvent e) {
-    CardPane2.requestFocus();     
+private void CardClicked() {
+    CardPane2.requestFocus(); 
     
 }
 @FXML
@@ -105,6 +119,7 @@ private void XacNhanClicked(MouseEvent e){
        if (cardController != null) {
         cardController.updateLabel(TextField2.getText()); // Gọi phương thức updateLabel() của CardController để cập nhật label
     }
+       CardClicked();
 }
 
  public void setCard(MainCard card) {

@@ -19,7 +19,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="43.0" layoutY="201.0" prefHeight="66.0" prefWidth="378.0" promptText="Thêm mô tả chi tiết hơn...">
+            <TextField fx:id="TextDes" layoutX="43.0" layoutY="201.0" prefHeight="66.0" prefWidth="378.0" promptText="Thêm mô tả chi tiết hơn...">
                <font>
                   <Font size="15.0" />
                </font>

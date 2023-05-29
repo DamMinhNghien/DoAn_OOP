@@ -5,7 +5,6 @@
 package Controller;
 
 import Card.MainCard;
-import Conection.ConnectionDB;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -19,21 +18,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.sql.ResultSet;
-
-
- import javafx.scene.control.TextField;
-
- import java.sql.PreparedStatement;
+import javafx.scene.control.TextField;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
- import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-
-
-
 
 /**
  * FXML Controller class
@@ -41,6 +31,7 @@ import javafx.scene.image.Image;
  * @author admin
  */
 public class CardController implements Initializable {
+
     private MainCard card;
     private Connection conn = null;
     private PreparedStatement pat = null;
@@ -52,8 +43,8 @@ public class CardController implements Initializable {
     private Button AddTitle;
     @FXML
     private TextField TextField1;
-    
-     public void setCard(MainCard card) {
+
+    public void setCard(MainCard card) {
         this.card = card;
     }
 
@@ -61,10 +52,33 @@ public class CardController implements Initializable {
     private void addTitle(MouseEvent e) throws SQLException {
         String text = TextField1.getText();
         if (!text.isEmpty()) {
-           
-           card.setTitle(text);
+            int maxId = card.MaxID();
+            card.IDCard = maxId + 1;
+            card.setTitle(text);
             label.setText(card.title);
-           card.TitleDB(card.title, card.IDCard);
+            card.IDTitleDB(card.IDCard, card.title);
+            label.prefHeight(26);
+            label.prefWidth(107);
+            label.setLayoutX(36);
+            label.setLayoutY(26);
+            CardPane.getChildren().add(label);
+            label.setStyle("-fx-text-fill: black;");
+            AddTitle.setVisible(false);
+            TextField1.setVisible(false);
+        } else {
+            // Hiển thị thông báo lỗi cho người dùng
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập tiêu đề thẻ!");
+            alert.showAndWait();
+        }
+
+    }
+
+    public void UpTitleDB() {
+        if (card.checkTitle() == true) {
+            label.setText(card.title);
             label.prefHeight(26);
             label.prefWidth(107);
             label.setLayoutX(36);
@@ -74,30 +88,16 @@ public class CardController implements Initializable {
             AddTitle.setVisible(false);
             TextField1.setVisible(false);
         }
+    }
 
-      
-    }
-    public void UpTitleDB(){
-        if(card.checkTitle()==true){
-         label.setText(card.title);
-         label.prefHeight(26);
-            label.prefWidth(107);
-            label.setLayoutX(36);
-            label.setLayoutY(26);
-            CardPane.getChildren().add(label);
-            label.setStyle("-fx-text-fill: black;");
-             AddTitle.setVisible(false);
-            TextField1.setVisible(false);
-   }
-    }
     public void newscene(MouseEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
         AnchorPane newScenePane = loader.load();
-       NewSceneController newSceneController = loader.getController();
-       newSceneController.setCard(card);
+        NewSceneController newSceneController = loader.getController();
+        newSceneController.setCard(card);
         String labelText = label.getText();
-         newSceneController.setLabelText(labelText);
-         newSceneController.setCardController(this); 
+        newSceneController.setLabelText(labelText);
+        newSceneController.setCardController(this);
         Stage newStage = new Stage();
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(CardPane.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
@@ -110,18 +110,17 @@ public class CardController implements Initializable {
             label.setVisible(true);
         });
     }
+
     public void updateLabel(String newTitle) {
-    label.setText(newTitle);
-}
- 
+        label.setText(newTitle);
+    }
+
     /**
      * Initializes the controller class.
      */
-        @Override
-public void initialize(URL url, ResourceBundle rb) {
-    
-   
-}
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
 
-    
+    }
+
 }

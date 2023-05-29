@@ -4,10 +4,6 @@
  */
 package Controller;
 
-
-
-
-
 import Card.MainCard;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
@@ -16,30 +12,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-
 import javafx.scene.layout.AnchorPane;
-
-
 
 /**
  *
  * @author admin
  */
-
 public class FXMLDocumentController implements Initializable {
-    
+
     private Connection conn = null;
     private PreparedStatement pat = null;
 
@@ -47,80 +35,76 @@ public class FXMLDocumentController implements Initializable {
     private ListView<AnchorPane> container1; // Khai báo và chú thích biến container với @FXML
 //    @FXML
 //private Button myButton;
-     @FXML
-   private AnchorPane CardPane;
+    @FXML
+    private AnchorPane CardPane;
 
-   
-@FXML
-public void TaoCard(MouseEvent event) throws IOException, SQLException {
-     MainCard NewCard1=new MainCard();
-    
-     int maxId=NewCard1.MaxID();
-     NewCard1.IDCard=maxId+1;
-     NewCard1.IDCarDB(NewCard1.IDCard);
-     createNewCard(NewCard1);
-}
- @FXML 
-public void ReTaoCard() throws IOException, SQLException {
-    Connection conn = null;
-    PreparedStatement pat = null;
-    ResultSet rs = null;
-    try {
-        conn = Conection.ConnectionDB.dbConn();
-        String sql = "SELECT COUNT(IDCard) AS NumCards FROM The";
-        pat = conn.prepareStatement(sql);
-        rs = pat.executeQuery();
-        if (rs.next()) {
-            int numCards = rs.getInt("NumCards");
-            System.out.println("Number of cards: " + numCards);
-            // Tạo các card còn thiếu để đạt đến số lượng mong muốn
-            for (int i = 0; i < numCards; i++) {
-                MainCard newCard = new MainCard();
-                newCard.IDCard = i + 1;
-                createNewCard(newCard);
+    @FXML
+    public void TaoCard(MouseEvent event) throws IOException, SQLException {
+        MainCard NewCard1 = new MainCard();
+        createNewCard(NewCard1);
+    }
+
+    @FXML
+    public void ReTaoCard() throws IOException, SQLException {
+        Connection conn = null;
+        PreparedStatement pat = null;
+        ResultSet rs = null;
+        try {
+            conn = Conection.ConnectionDB.dbConn();
+            String sql = "SELECT COUNT(IDCard) AS NumCards FROM The";
+            pat = conn.prepareStatement(sql);
+            rs = pat.executeQuery();
+            if (rs.next()) {
+                int numCards = rs.getInt("NumCards");
+                System.out.println("Number of cards: " + numCards);
+                // Tạo các card còn thiếu để đạt đến số lượng mong muốn
+                for (int i = 0; i < numCards; i++) {
+                    MainCard newCard = new MainCard();
+                    newCard.IDCard = i + 1;
+                    createNewCard(newCard);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pat != null) {
+                pat.close();
+            }
+            if (conn != null) {
+                conn.close();
             }
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
-    } finally {
-        if (rs != null) {
-            rs.close();
-        }
-        if (pat !=null) {
-            pat.close();
-        }
-        if (conn != null) {
-            conn.close();
-        }
     }
-}
-@FXML
-private void createNewCard(MainCard NewCard) throws SQLException {
-    try {
-        
-        conn = (Connection) Conection.ConnectionDB.dbConn();
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Card.fxml"));
-        AnchorPane cardPane = loader.load();
-          CardController cardController = loader.getController();
-        cardController.setCard(NewCard);
-        cardController.UpTitleDB();
-        // Thực hiện các thao tác tùy chỉnh cho cardPane nếu cần
-         ObservableList<AnchorPane> items = container1.getItems();
-        // Thêm cardPane vào danh sách mục
-        items.add(cardPane);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-   
-}
 
+    @FXML
+    private void createNewCard(MainCard NewCard) throws SQLException {
+        try {
+
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/Card.fxml"));
+            AnchorPane cardPane = loader.load();
+            CardController cardController = loader.getController();
+            cardController.setCard(NewCard);
+            cardController.UpTitleDB();
+            // Thực hiện các thao tác tùy chỉnh cho cardPane nếu cần
+            ObservableList<AnchorPane> items = container1.getItems();
+            // Thêm cardPane vào danh sách mục
+            items.add(cardPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             ReTaoCard();
-     
+
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

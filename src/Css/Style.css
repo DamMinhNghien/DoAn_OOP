@@ -79,6 +79,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .AnchorPane{
     -fx-background-color: #ffffff;
 }
-
+.DesPane{
+    -fx-background-color: #8f8f8f;
+}
 
 

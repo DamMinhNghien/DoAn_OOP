@@ -5,13 +5,18 @@
 package Controller;
 
 import Card.MainCard;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,6 +24,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -27,7 +37,18 @@ import javafx.scene.control.Button;
  */
 public class NewSceneController implements Initializable {
 
+    @FXML
+    private Label LabelMove;
+    @FXML
+    private FontAwesomeIcon IconMove;
+
+    @FXML
+    private Button XButton;
+
+    @FXML
+    private AnchorPane newScenePane;
     private CardController cardController;
+    private Stage NewStage;
     private MainCard card;
     @FXML
     private TextField TextField2 = new TextField();
@@ -37,8 +58,11 @@ public class NewSceneController implements Initializable {
     private AnchorPane CardPane2;
     @FXML
     private Button XacNhan = new Button();
+    @FXML
+    private Pane PaneDes;
 
     @FXML
+
     public void setLabelText(String text) {
         dataLabel.setText(text);
         dataLabel.prefHeight(52);
@@ -128,6 +152,47 @@ public class NewSceneController implements Initializable {
 
     public void setCardController(CardController cardController) {
         this.cardController = cardController;
+    }
+
+    public void IconMove() {
+        LabelMove.setLayoutY(LabelMove.getLayoutY() + 120);
+        IconMove.setLayoutY(IconMove.getLayoutY() + 120);
+    }
+
+    public void IconBack() {
+        LabelMove.setLayoutY(LabelMove.getLayoutY() - 120);
+        IconMove.setLayoutY(IconMove.getLayoutY() - 120);
+    }
+
+    @FXML
+    private void PaneDes(MouseEvent e) throws IOException {
+        IconMove();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneDes.fxml"));
+        AnchorPane newScenePane = loader.load();
+        Stage newStage = new Stage();
+
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.initOwner(PaneDes.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
+        newStage.getIcons().add(new Image(getClass().getResourceAsStream("../image/trello.png")));
+        newStage.initStyle(StageStyle.UNDECORATED);
+        Scene newScene = new Scene(newScenePane);
+        newStage.setScene(newScene);
+        newStage.setX(510);
+        newStage.setY(280);
+        SceneDesController sceneDesController = loader.getController();
+        sceneDesController.setNewSceneController(this);
+        newStage.setOnCloseRequest(event -> {
+            event.consume();
+        });
+        newStage.showAndWait();
+        //378 166
+    }
+
+    @FXML
+    private void handleXButtonAction(ActionEvent event
+    ) {
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     @Override

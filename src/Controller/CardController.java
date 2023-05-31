@@ -19,11 +19,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -99,6 +102,7 @@ public class CardController implements Initializable {
         newSceneController.setLabelText(labelText);
         newSceneController.setCardController(this);
         Stage newStage = new Stage();
+        newStage.initStyle(StageStyle.UNDECORATED);
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(CardPane.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
         newStage.setTitle("Chỉnh Sửa Thẻ");

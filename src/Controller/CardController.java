@@ -35,6 +35,7 @@ import javafx.stage.StageStyle;
  */
 public class CardController implements Initializable {
 
+    private Label labeldes1 = new Label();
     private MainCard card;
     private Connection conn = null;
     private PreparedStatement pat = null;
@@ -93,11 +94,12 @@ public class CardController implements Initializable {
         }
     }
 
-    public void newscene(MouseEvent e) throws IOException {
+    public void newscene(MouseEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/newScene.fxml"));
         AnchorPane newScenePane = loader.load();
         NewSceneController newSceneController = loader.getController();
         newSceneController.setCard(card);
+        newSceneController.ReDes(card);
         String labelText = label.getText();
         newSceneController.setLabelText(labelText);
         newSceneController.setCardController(this);
@@ -109,6 +111,7 @@ public class CardController implements Initializable {
         newStage.getIcons().add(new Image(getClass().getResourceAsStream("../image/trello.png")));
         Scene newScene = new Scene(newScenePane);
         newStage.setScene(newScene);
+
         newStage.showAndWait();
         newStage.setOnCloseRequest(event -> {
             label.setVisible(true);

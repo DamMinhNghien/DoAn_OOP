@@ -24,7 +24,7 @@ public class MainCard {
 
     public int IDCard;
     public String title;
-    private String description;
+    public Description description;
     private Date dueDate;
     private List<Label> labels;
     private List<Attachment> attachments;
@@ -32,6 +32,8 @@ public class MainCard {
     private boolean archived;
 
     public MainCard() {
+
+        this.description = new Description(1, "", 2, "", false);
     }
 
     public void setTitle(String title) {
@@ -42,12 +44,12 @@ public class MainCard {
         return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Description getDescription() {
+        return description;
     }
 
-    public String getDescription() {
-        return description;
+    public void setDescription(Description description) {
+        this.description = description;
     }
 
     public void setDueDate(Date dueDate) {
@@ -189,6 +191,170 @@ public class MainCard {
             }
         }
         return hasTitle;
+    }
+
+    public void DesDB() throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ?";
+            pat = conn.prepareStatement(theQuery);
+            pat.setString(1, description.getContent());
+            pat.setInt(2, IDCard);
+            pat.executeUpdate();
+
+            // Chèn dữ liệu vào bảng "Mota_ChiTiet"
+            String motaQuery = "INSERT INTO Mota_ChiTiet ( SizeChu, FontChu,TheID,IsBold,ID) VALUES (?,?,?, ?, ?)";
+            pat = conn.prepareStatement(motaQuery);
+            pat.setInt(5, description.getId());
+            pat.setInt(3, IDCard);
+            pat.setDouble(1, description.getSize());
+            pat.setString(2, description.getFont());
+            pat.setBoolean(4, description.isInDam());
+            pat.executeUpdate();
+            System.out.println(description.getId());
+            System.out.println(IDCard);
+            System.out.println(description.getSize());
+            System.out.println(description.getFont());
+            System.out.println(description.isInDam());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public int getNewID() throws SQLException {
+        int newID = 0;
+        try (Connection conn = Conection.ConnectionDB.dbConn(); PreparedStatement stmt = conn.prepareStatement("SELECT MAX(ID) FROM Mota_ChiTiet")) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                newID = rs.getInt(1) + 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+        return newID;
+    }
+
+    public void DesDB1() throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "UPDATE The SET description = ? WHERE IDCard = ?";
+            pat = conn.prepareStatement(theQuery);
+            pat.setString(1, description.getContent());
+            pat.setInt(2, IDCard);
+            pat.executeUpdate();
+            System.out.println(IDCard);
+            System.out.println(description.getContent());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void UpdateDes() throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "UPDATE Mota_ChiTiet SET SizeChu=?, FontChu=?, IsBold=? WHERE TheID=?";
+            pat = conn.prepareStatement(theQuery);
+            pat.setDouble(1, description.getSize());
+            pat.setString(2, description.getFont());
+            pat.setBoolean(3, description.isInDam());
+            pat.setInt(4, IDCard);
+            pat.executeUpdate();
+            System.out.println(description.getId());
+            System.out.println(IDCard);
+            System.out.println(description.getSize());
+            System.out.println(description.getFont());
+            System.out.println(description.isInDam());
+            System.out.println("up");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void Deletedes() throws SQLException {
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            // Chèn dữ liệu vào bảng "The"
+            String theQuery = "DELETE FROM Mota_ChiTiet WHERE TheID=?";
+            pat = conn.prepareStatement(theQuery);
+            pat.setInt(1, IDCard);
+            pat.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean CheckDes() {
+
+        boolean hasTitle = false;
+        try {
+            conn = (Connection) Conection.ConnectionDB.dbConn();
+            String sql = "SELECT description FROM The WHERE IDCard = ?";
+            pat = conn.prepareStatement(sql);
+            pat.setInt(1, IDCard);
+            ResultSet rs = pat.executeQuery();
+            if (rs.next()) {
+                String description = rs.getString("description");
+                if (description != null && !description.isEmpty()) {
+                    this.description.setContent(description);
+                    hasTitle = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (pat != null) {
+                    pat.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return hasTitle;
+    }
+
+    public boolean isBoldDescription(String description) {
+        return description.contains("<b>") && description.contains("</b>");
     }
 
     public void initialize(URL url, ResourceBundle rb) {

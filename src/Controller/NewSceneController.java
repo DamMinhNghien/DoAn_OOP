@@ -8,6 +8,9 @@ import Card.MainCard;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,6 +27,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -44,7 +49,8 @@ public class NewSceneController implements Initializable {
 
     @FXML
     private Button XButton;
-
+    private Connection conn = null;
+    private PreparedStatement pat = null;
     @FXML
     private AnchorPane newScenePane;
     private CardController cardController;
@@ -55,14 +61,19 @@ public class NewSceneController implements Initializable {
     @FXML
     private Label dataLabel = new Label();
     @FXML
+    private Label labeldes = new Label();
+    @FXML
     private AnchorPane CardPane2;
     @FXML
     private Button XacNhan = new Button();
     @FXML
+    private Button XacNhan2;
+    @FXML
     private Pane PaneDes;
+    @FXML
+    private AnchorPane CardPane3;
 
     @FXML
-
     public void setLabelText(String text) {
         dataLabel.setText(text);
         dataLabel.prefHeight(52);
@@ -83,15 +94,16 @@ public class NewSceneController implements Initializable {
         XacNhan.setLayoutX(370);
         XacNhan.setLayoutY(67);
         XacNhan.setText("OK");
+
         if (!text.isEmpty()) {
 
-            CardPane2.getChildren().add(dataLabel);
+            CardPane3.getChildren().add(dataLabel);
 
             TextField2.setVisible(false);
-            CardPane2.getChildren().add(TextField2);
+            CardPane3.getChildren().add(TextField2);
 
             XacNhan.setVisible(false);
-            CardPane2.getChildren().add(XacNhan);
+            CardPane3.getChildren().add(XacNhan);
             XacNhan.setOnMouseClicked(this::XacNhanClicked);
             dataLabel.setOnMouseClicked(this::labelClicked);
         } else {
@@ -116,7 +128,7 @@ public class NewSceneController implements Initializable {
 
     @FXML
     private void CardClicked() {
-        CardPane2.requestFocus();
+        CardPane3.requestFocus();
 
     }
 
@@ -164,6 +176,130 @@ public class NewSceneController implements Initializable {
         IconMove.setLayoutY(IconMove.getLayoutY() - 120);
     }
 
+    public void panevi() {
+        PaneDes.setVisible(false);
+    }
+
+    public void panevi1() {
+        PaneDes.setVisible(true);
+    }
+
+    public void ReDes(MainCard card) throws SQLException {
+        if (card.CheckDes()) {
+            try {
+
+                conn = (Connection) Conection.ConnectionDB.dbConn();
+                String query = "SELECT The.description, Mota_ChiTiet.sizechu, Mota_ChiTiet.isbold "
+                        + "FROM Mota_ChiTiet "
+                        + "JOIN The ON Mota_ChiTiet.TheID = The.IDCard "
+                        + "WHERE Mota_ChiTiet.TheID = ?";
+                PreparedStatement pat = conn.prepareStatement(query);
+                pat.setInt(1, card.IDCard);
+                ResultSet resultSet = pat.executeQuery();
+                while (resultSet.next()) {
+                    String description = resultSet.getString("description");
+                    int sizechu = resultSet.getInt("sizechu");
+                    boolean isbold = resultSet.getBoolean("isbold");
+                    description = description.replace("\\n", "\n");
+                    System.out.println(description);
+                    Label labeldes1 = new Label();
+                    card.description.setContent(description);
+                    card.description.setSize(sizechu);
+                    card.description.setInDam(isbold);
+                    System.out.println("da xuat");
+                    panevi();
+                    double lineheight = card.description.getSize() * 1.5;
+                    double linecount = card.description.getContent().split("\n").length;
+                    double labeldesheight = lineheight * linecount;
+                    checklabeldes();
+                    System.out.println("changed");
+                    labeldes1.setText(card.description.getContent());
+                    labeldes1.setPrefSize(378, labeldesheight);
+                    setLabeldes(labeldes1);
+                    setviChinhSua();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    public void setLabeldes(Label label) throws SQLException {
+
+        if (!CardPane3.getChildren().contains(labeldes)) {
+            labeldes.setText(label.getText());
+            labeldes.setPrefSize(label.getPrefWidth(), label.getPrefHeight());
+            labeldes.setFont(label.getFont());
+
+            labeldes.setLayoutX(52);
+            labeldes.setLayoutY(163);
+            CardPane3.getChildren().add(labeldes);
+            move(labeldes);
+            double newHeight = labeldes.getLayoutY() + labeldes.getHeight() + 10; // Add some padding
+            if (newHeight > CardPane3.getHeight()) {
+                CardPane3.setPrefHeight(newHeight);
+            }
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(CardPane3);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setPrefHeight(508);
+            scrollPane.setPrefWidth(660);
+            scrollPane.setLayoutX(0);
+            scrollPane.setLayoutY(0);
+
+            CardPane2.getChildren().add(scrollPane);
+        }
+    }
+
+    public void move(Label label) {
+        if (label.getPrefHeight() >= 50) {
+            System.out.println(label.getPrefHeight());
+            IconMove.setLayoutY(163 + 54 + 23 + label.getPrefHeight());
+            LabelMove.setLayoutY(163 + 54 + label.getPrefHeight());
+        } else {
+            IconMove.setLayoutY(163 + 54 + 23 + label.getPrefHeight());
+            LabelMove.setLayoutY(163 + 54 + label.getPrefHeight());
+        }
+    }
+
+    @FXML
+    public void XacNhan2(MouseEvent e) throws IOException {
+        CardPane3.getChildren().remove(labeldes);
+
+        IconMove();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../FXML/SceneDes.fxml"));
+        AnchorPane newScenePane = loader.load();
+        Stage newStage = new Stage();
+
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.initOwner(PaneDes.getScene().getWindow()); // Nếu primaryStage là stage chính của ứng dụng
+        newStage.getIcons().add(new Image(getClass().getResourceAsStream("../image/trello.png")));
+        newStage.initStyle(StageStyle.UNDECORATED);
+        Scene newScene = new Scene(newScenePane);
+        newStage.setScene(newScene);
+        newStage.setX(498);
+        newStage.setY(263);
+        SceneDesController sceneDesController = loader.getController();
+        sceneDesController.setNewSceneController(this);
+        sceneDesController.setCard(card);
+        sceneDesController.setTextArea(labeldes);
+        newStage.setOnCloseRequest(event -> {
+            event.consume();
+        });
+
+        newStage.showAndWait();
+        //378 166
+    }
+
     @FXML
     private void PaneDes(MouseEvent e) throws IOException {
         IconMove();
@@ -177,15 +313,27 @@ public class NewSceneController implements Initializable {
         newStage.initStyle(StageStyle.UNDECORATED);
         Scene newScene = new Scene(newScenePane);
         newStage.setScene(newScene);
-        newStage.setX(510);
-        newStage.setY(280);
+        newStage.setX(498);
+        newStage.setY(263);
         SceneDesController sceneDesController = loader.getController();
         sceneDesController.setNewSceneController(this);
+        sceneDesController.setCard(card);
         newStage.setOnCloseRequest(event -> {
             event.consume();
         });
+
         newStage.showAndWait();
         //378 166
+    }
+
+    public void checklabeldes() {
+        if (CardPane3.getChildren().contains(labeldes)) {
+            CardPane3.getChildren().remove(labeldes);
+        }
+    }
+
+    public void setviChinhSua() {
+        XacNhan2.setVisible(true);
     }
 
     @FXML

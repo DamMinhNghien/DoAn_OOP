@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="947.0" styleClass="root" stylesheets="@../Css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="947.0" styleClass="root1" stylesheets="@../Css/Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLDocumentController">
    <children>
       <VBox layoutY="67.0" opacity="0.8" prefHeight="641.0" prefWidth="162.0" style="-fx-background-color: #255873;" stylesheets="@../Css/Style.css">
          <children>
@@ -79,7 +79,7 @@
                   <Button fx:id="ThemThe" layoutX="133.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#TaoCard" styleClass="OKbutton" stylesheets="@../Css/Style.css" text="+" />
                </children>
             </Pane>
-            <ListView fx:id="container1" prefHeight="518.0" prefWidth="190.0" styleClass="list-cell" stylesheets="@../Css/style.css" />
+            <ListView fx:id="container1" prefHeight="518.0" prefWidth="190.0" styleClass="list-cell1" stylesheets="@../Css/style.css" />
          </children>
       </VBox>
    </children>

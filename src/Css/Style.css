@@ -32,7 +32,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
   
 }
 
-.root{
+.root1{
     -fx-background-image: url('../image/abstract-22108_960_720.jpg');
     -fx-background-size:cover;
 }
@@ -54,7 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .card:pressed{
     -fx-opacity: 1.1;
 }
-.list-cell {
+.list-cell1 {
         -fx-background-radius: 20;
          -fx-background-color: #ffffff;
 
@@ -64,10 +64,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-radius: 20;
 }
 
-.list-cell:selected:focused, .list-cell:selected {
+.list-cell1:selected:focused, .list-cell:selected {
     -fx-background-color: white;
 }
-.list-cell{
+.list-cell1{
     background-color: gray;
 }
 .ListView{
@@ -82,5 +82,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .DesPane{
     -fx-background-color: #8f8f8f;
 }
-
-
+.SceneDes{
+    -fx-border-color: #255873;
+}
+.combo-box .list-cell:hover {
+    -fx-background-color: lightgray;
+}
+.combo-box .list-cell:selected {
+    -fx-background-color: lightblue;
+}
+.bold-text {
+    -fx-font-weight: bold;
+}
+.normal-text{
+     -fx-font-weight: normal;
+}
